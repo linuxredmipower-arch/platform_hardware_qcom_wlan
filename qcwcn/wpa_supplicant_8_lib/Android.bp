@@ -47,6 +47,10 @@ cc_library_static {
         "-DCONFIG_P2P",
         "-Wall",
         "-Werror",
+        // A17 clang defaults to -fno-common; the shared header
+        // driver_cmd_nl80211_common.h has tentative definitions of drv/bss
+        // which must remain common to avoid duplicate symbols at link time.
+        "-fcommon",
     ],
     srcs: [
         "driver_cmd_nl80211.c",
